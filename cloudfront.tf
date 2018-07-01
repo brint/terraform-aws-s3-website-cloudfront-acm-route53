@@ -64,3 +64,15 @@ resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
 output "cloudfront_origin_access_iam_arn" {
   value = "${aws_cloudfront_origin_access_identity.origin_access_identity.iam_arn}"
 }
+
+output "cloudfront_distribution_arn" {
+  value = "${aws_cloudfront_distribution.cdn.arn}"
+}
+
+output "cloudfront_distribution_domain" {
+  value = "${aws_cloudfront_distribution.cdn.domain_name}"
+}
+
+output "cloudfront_distribution_hosted_zone_id" {
+  value = "${aws_cloudfront_distribution.cdn.hosted_zone_id}"
+}
