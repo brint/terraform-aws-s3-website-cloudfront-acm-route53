@@ -24,6 +24,8 @@ A lot of what's in here I did find in gists, repos, and blog posts of folks alon
 1. Run `terraform plan` to see what terraform is going to do.
 1. Run `terraform apply` to have it setup the infrastructure
 
+You will need to take the name server outputs for the domain and update your registrar to point to the name servers that you see at the end of the terraform run.
+
 ## Troubleshooting
 
 Not a lot to put here, if resources exist such as zones in Route53 or buckets in S3, you will need to use different buckets. ACM also makes the assumption that you are the owner of the domain and can sign off on a certificate being used. With ACM, you may need to run `terraform apply` multiple times since the ACM cert may not be ready by the time terraform is setting up CloudFront.
