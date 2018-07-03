@@ -13,6 +13,8 @@ A lot of what's in here I did find in gists, repos, and blog posts of folks alon
 
 You will get HTTPS by default with these templates with automatic redirects for HTTP to HTTPS.
 
+Logs from CloudFront will go to a S3 bucket and logs will be expired after 90 days by default.
+
 ## Which version of this is right for me?
 
 ### Best Practice Version

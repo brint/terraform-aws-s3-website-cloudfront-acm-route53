@@ -16,6 +16,18 @@ variable "bucket_name" {
   type        = "string"
 }
 
+variable "logs_bucket_name" {
+  description = "Name of S3 bucket for site's CloudFront logs to go to"
+  default     = "brint-example.com-logs"
+  type        = "string"
+}
+
+variable "logs_retention_duration" {
+  description = "How long to maintain CloudFront logs in the S3 bucket before expiring them."
+  default     = "90"
+  type        = "string"
+}
+
 variable "environment" {
   description = "Name of environment being provisioned, will be used to tag all resources"
   default     = "production"

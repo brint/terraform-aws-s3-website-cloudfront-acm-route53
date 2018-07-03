@@ -34,6 +34,24 @@ EOF
   }
 }
 
+resource "aws_s3_bucket" "cfn_logging_bucket" {
+  bucket = "${var.logs_bucket_name}"
+  acl    = "log-delivery-write"
+
+  lifecycle_rule {
+    enabled = true
+
+    expiration {
+      days = "${var.logs_retention_duration}"
+    }
+  }
+
+  tags {
+    Environment = "${var.environment}"
+    Site = "${var.domain_name}"
+  }
+}
+
 output "s3_bucket_name" {
   value = "${aws_s3_bucket.website.id}"
 }
@@ -44,4 +62,12 @@ output "s3_bucket_arn" {
 
 output "s3_bucket_website_endpoint" {
   value = "${aws_s3_bucket.website.website_endpoint}"
+}
+
+output "s3_cfn_logging_bucket_arn" {
+  value = "${aws_s3_bucket.cfn_logging_bucket.arn}"
+}
+
+output "s3_cfn_logging_bucket_domain_name" {
+  value = "${aws_s3_bucket.cfn_logging_bucket.bucket_domain_name}"
 }

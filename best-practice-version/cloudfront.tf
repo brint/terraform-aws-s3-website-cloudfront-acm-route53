@@ -15,6 +15,10 @@ resource "aws_cloudfront_distribution" "cdn" {
   is_ipv6_enabled     = true
   default_root_object = "index.html"
 
+  logging_config {
+    bucket = "${aws_s3_bucket.cfn_logging_bucket.bucket_domain_name}"
+  }
+
   default_cache_behavior {
     allowed_methods  = ["GET", "HEAD"]
     cached_methods   = ["GET", "HEAD"]
