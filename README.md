@@ -11,6 +11,24 @@ This repo exists because I spent a fair amount of time stitching this together a
 
 A lot of what's in here I did find in gists, repos, and blog posts of folks along with the terraform docs. Thank you all for sharing. Apologies, as I didn't do a good job of keeping track of all places where I was able to get snippets to give credit.
 
+You will get HTTPS by default with these templates with automatic redirects for HTTP to HTTPS.
+
+## Which version of this is right for me?
+
+### Best Practice Version
+Use this to start if you're not sure. It uses an origin access identity to permit CloudFront to read from your private S3 bucket.
+
+### Subdirectories with indexes
+This is the one you should use if you have situations where subdirectories have an `index.html`, but the references in your website don't explicitly reference `index.html`.
+
+Example where you will have problems with the best practice version:
+
+```
+https://example.com/subdir/
+```
+
+CloudFront will only automatically render `index.html` in the root path, not sub directories. This version is more permissive with read permissions on the S3 bucket and uses the s3 website URL as the origin in CloudFront. The only files that are different across the best practice and this version are `cloudfront.tf` and `s3.tf`.
+
 ## Setup
 
 1. Install [terraform](https://www.terraform.io/)

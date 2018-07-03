@@ -1,14 +1,22 @@
 resource "aws_cloudfront_distribution" "cdn" {
   origin {
     origin_id   = "${var.domain_name}"
-    domain_name = "${var.bucket_name}.s3.amazonaws.com"
-    s3_origin_config {
-    origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
+    domain_name = "${aws_s3_bucket.website.website_endpoint}"
+
+    custom_origin_config {
+      # The following is dictating what protocol to use in connecting to the
+      # origin. This is because the s3-website service only runs HTTP. Your
+      # site will still be served via HTTPS from CloudFront.
+      origin_protocol_policy = "http-only"
+      http_port = "80"
+      https_port = "443"
+      origin_ssl_protocols = ["TLSv1.2"]
     }
   }
 
 
-  # The www alias is important or you'll get 403's.
+  # If using route53 aliases for DNS we need to declare it here too,
+  # otherwise we'll get 403s.
   aliases = ["${var.domain_name}", "www.${var.domain_name}"]
 
   enabled             = true
@@ -21,13 +29,12 @@ resource "aws_cloudfront_distribution" "cdn" {
     target_origin_id = "${var.domain_name}"
 
     forwarded_values {
-      query_string = false
+      query_string = true
       cookies {
         forward = "none"
       }
     }
 
-    # Redirect all users to the https version of the site.
     viewer_protocol_policy = "redirect-to-https"
     min_ttl                = 0
     default_ttl            = 3600
@@ -48,7 +55,6 @@ resource "aws_cloudfront_distribution" "cdn" {
     Environment = "${var.environment}"
     Site = "${var.domain_name}"
   }
-
 
   viewer_certificate {
     acm_certificate_arn = "${aws_acm_certificate.cert.arn}"
