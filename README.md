@@ -33,7 +33,7 @@ CloudFront will only automatically render `index.html` in the root path, not sub
 
 ## Setup
 
-1. Install [terraform](https://www.terraform.io/)
+1. Install [terraform](https://www.terraform.io/) (Currently this is for v0.13.x)
 1. My environment has all of my AWS credentials set in `~/.aws/credentials` which terraform leverages.
 
 

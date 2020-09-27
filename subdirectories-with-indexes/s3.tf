@@ -37,7 +37,7 @@ EOF
 
 resource "aws_s3_bucket" "cfn_logging_bucket" {
   bucket = var.logs_bucket_name
-  acl = "log-delivery-write"
+  acl    = "log-delivery-write"
 
   lifecycle_rule {
     enabled = true
@@ -49,7 +49,7 @@ resource "aws_s3_bucket" "cfn_logging_bucket" {
 
   tags = {
     Environment = var.environment
-    Site = var.domain_name
+    Site        = var.domain_name
   }
 }
 
