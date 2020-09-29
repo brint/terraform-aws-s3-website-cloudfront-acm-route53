@@ -7,6 +7,10 @@ This is a setup for hosting a static website leveraging the following AWS servic
 - Route 53
 - ACM
 
+The architecture nets to look like this:
+
+![Diagram](diagrams/static_website_hosting.png)
+
 This repo exists because I spent a fair amount of time stitching this together and it took a while to get to the setup I typically run. This is going to be my starter kit for new static websites.
 
 A lot of what's in here I did find in gists, repos, and blog posts of folks along with the terraform docs. Thank you all for sharing. Apologies, as I didn't do a good job of keeping track of all places where I was able to get snippets to give credit.
