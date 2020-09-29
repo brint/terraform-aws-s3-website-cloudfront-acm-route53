@@ -9,9 +9,7 @@ resource "aws_s3_bucket" "website" {
 
   cors_rule {
     allowed_headers = ["Authorizations"]
-
-    # Running a static website, wouldn't expect any method outside of GET
-    allowed_methods = ["GET"]
+    allowed_methods = ["GET", "HEAD"]
     allowed_origins = ["*"]
     expose_headers  = ["ETag"]
     max_age_seconds = 3000
@@ -71,6 +69,10 @@ output "s3_bucket_domain_name" {
   value = aws_s3_bucket.website.bucket_domain_name
 }
 
+output "s3_bucket_website_endpoint" {
+  value = aws_s3_bucket.website.website_endpoint
+}
+
 output "s3_cfn_logging_bucket_arn" {
   value = aws_s3_bucket.cfn_logging_bucket.arn
 }
@@ -78,4 +80,3 @@ output "s3_cfn_logging_bucket_arn" {
 output "s3_cfn_logging_bucket_domain_name" {
   value = aws_s3_bucket.cfn_logging_bucket.bucket_domain_name
 }
-

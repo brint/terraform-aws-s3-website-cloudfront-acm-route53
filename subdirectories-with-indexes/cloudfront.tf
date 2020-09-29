@@ -32,7 +32,7 @@ resource "aws_cloudfront_distribution" "cdn" {
     target_origin_id = var.domain_name
 
     forwarded_values {
-      query_string = true
+      query_string = false
       cookies {
         forward = "none"
       }
@@ -85,4 +85,3 @@ output "cloudfront_distribution_domain" {
 output "cloudfront_distribution_hosted_zone_id" {
   value = aws_cloudfront_distribution.cdn.hosted_zone_id
 }
-

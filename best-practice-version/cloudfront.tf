@@ -31,7 +31,6 @@ resource "aws_cloudfront_distribution" "cdn" {
       }
     }
 
-    # Redirect all users to the https version of the site.
     viewer_protocol_policy = "redirect-to-https"
     min_ttl                = 0
     default_ttl            = 3600
