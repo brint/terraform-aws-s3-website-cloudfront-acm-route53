@@ -1,7 +1,7 @@
 resource "aws_acm_certificate" "cert" {
   domain_name               = var.domain_name
   subject_alternative_names = ["www.${var.domain_name}"]
-  validation_method         = "EMAIL"
+  validation_method         = "DNS"
 
   # Terraform requires ACM certs for CloudFront to be generated in us-east-1
   provider = aws.virginia
@@ -23,4 +23,3 @@ output "acm_arn" {
 output "acm_domain_name" {
   value = aws_acm_certificate.cert.domain_name
 }
-
