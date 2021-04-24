@@ -1,5 +1,7 @@
 # terraform-aws-s3-website-cloudfront-acm-route53
 
+Assumes use of Terraform v0.15.
+
 This is a setup for hosting a static website leveraging the following AWS services:
 
 - S3
