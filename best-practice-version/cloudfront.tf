@@ -22,7 +22,7 @@ resource "aws_cloudfront_distribution" "cdn" {
   default_cache_behavior {
     allowed_methods  = ["GET", "HEAD"]
     cached_methods   = ["GET", "HEAD"]
-    target_origin_id = "S3-${var.domain_name}"
+    target_origin_id = "S3-${var.bucket_name}"
 
     forwarded_values {
       query_string = false
@@ -33,8 +33,9 @@ resource "aws_cloudfront_distribution" "cdn" {
 
     viewer_protocol_policy = "redirect-to-https"
     min_ttl                = 0
-    default_ttl            = 3600
-    max_ttl                = 86400
+    default_ttl            = 86400
+    max_ttl                = 31536000
+    compress               = true
   }
 
   # The cheapest priceclass
