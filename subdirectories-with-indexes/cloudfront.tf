@@ -23,7 +23,7 @@ resource "aws_cloudfront_distribution" "cdn" {
   default_root_object = "index.html"
 
   logging_config {
-    bucket = aws_s3_bucket.cfn_logging_bucket.bucket_domain_name
+    bucket = aws_s3_bucket.cfn_logging_bucket.bucket_regional_domain_name
   }
 
   default_cache_behavior {

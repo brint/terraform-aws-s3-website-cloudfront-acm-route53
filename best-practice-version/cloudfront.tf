@@ -1,7 +1,7 @@
 resource "aws_cloudfront_distribution" "cdn" {
   origin {
     origin_id   = "S3-${var.domain_name}"
-    domain_name = aws_s3_bucket.website.bucket_domain_name
+    domain_name = aws_s3_bucket.website.bucket_regional_domain_name
     s3_origin_config {
       origin_access_identity = aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path
     }
@@ -16,7 +16,7 @@ resource "aws_cloudfront_distribution" "cdn" {
   default_root_object = "index.html"
 
   logging_config {
-    bucket = aws_s3_bucket.cfn_logging_bucket.bucket_domain_name
+    bucket = aws_s3_bucket.cfn_logging_bucket.bucket_regional_domain_name
   }
 
   default_cache_behavior {
